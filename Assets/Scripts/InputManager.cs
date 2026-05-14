@@ -13,6 +13,7 @@ public abstract class InputManager: MonoBehaviour
     public abstract void LookInput(Vector2 newLookDirection);
     public Vector2 GetLook() { return look; }
     public abstract float GetYawFromLook();
+    public abstract float GetPitchFromLook();
     public abstract void SprintInput(bool newSprintState);
     public abstract void InteractInput(bool newInteractState);
 }
