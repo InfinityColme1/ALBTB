@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public abstract class InputManager: MonoBehaviour
@@ -7,7 +8,7 @@ public abstract class InputManager: MonoBehaviour
     public Vector2 move;
     protected Vector2 look;
     public bool sprint;
-    public bool interact;
+    public UnityEvent onInteract;
 
     public abstract void MoveInput(Vector2 newMoveDirection);
     public abstract void LookInput(Vector2 newLookDirection);
@@ -15,5 +16,5 @@ public abstract class InputManager: MonoBehaviour
     public abstract float GetYawFromLook();
     public abstract float GetPitchFromLook();
     public abstract void SprintInput(bool newSprintState);
-    public abstract void InteractInput(bool newInteractState);
+    public abstract void InteractInput();
 }

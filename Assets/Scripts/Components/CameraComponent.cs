@@ -5,10 +5,10 @@ using UnityEngine.Windows;
 public class CameraComponent : MonoBehaviour
 {
     [Header("Input and Output")]
-    [Tooltip("The inputs the camera will receive")]
-    [SerializeField] private InputManager source;
+    [Tooltip("The inputs this component will receive")]
+    [SerializeField] private InputManager _source;
     [Tooltip("The camera this component control")]
-    [SerializeField] private CinemachineCamera cam;
+    [SerializeField] private CinemachineCamera _cam;
 
     [Header("Camera Values")]
     [Tooltip("How far in degrees can you move the camera up")]
@@ -21,8 +21,9 @@ public class CameraComponent : MonoBehaviour
 
     private void Awake()
     {
-        source = this.gameObject.GetComponentInParent<InputManager>();
-        cam = this.gameObject.GetComponentInChildren<CinemachineCamera>();
+        _source = this.gameObject.GetComponentInParent<InputManager>();
+        if (!_source) Debug.LogError("This component needs an InputManager instance attached in this GameObject or in the parent");
+        _cam = this.gameObject.GetComponentInChildren<CinemachineCamera>();
     }
 
     void Start()
@@ -37,7 +38,7 @@ public class CameraComponent : MonoBehaviour
 
     void CameraRotation()
     {
-        _currentPitch -= source.GetPitchFromLook();
+        _currentPitch -= _source.GetPitchFromLook();
         _currentPitch = ClampAngle(_currentPitch, bottomClamp, topClamp);
 
         transform.localRotation = Quaternion.Euler(_currentPitch, 0.0f, 0.0f);

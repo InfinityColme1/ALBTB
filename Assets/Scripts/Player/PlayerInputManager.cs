@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerInputManager : InputManager
 {
@@ -26,7 +27,7 @@ public class PlayerInputManager : InputManager
     public void OnMove(InputValue value) => MoveInput(value.Get<Vector2>());
     public void OnLook(InputValue value) => LookInput(value.Get<Vector2>());
     public void OnSprint(InputValue value) => SprintInput(value.isPressed);
-    public void OnInteract(InputValue value) => InteractInput(value.isPressed);
+    public void OnInteract(InputValue value) => InteractInput();
 
 
     public override void MoveInput(Vector2 newMoveDirection) => move = newMoveDirection;
@@ -36,7 +37,7 @@ public class PlayerInputManager : InputManager
         Debug.Log(newSprintState);
         sprint = newSprintState;
     }
-    public override void InteractInput(bool newInteractState) => interact = newInteractState;
+    public override void InteractInput() => onInteract.Invoke();
 
     public override float GetYawFromLook()
     {
