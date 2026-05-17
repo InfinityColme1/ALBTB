@@ -7,9 +7,11 @@ public class HealthComponent : MonoBehaviour
     [Header("Health component settings")]
     [Tooltip("The total health points of this component")]
     [SerializeField] private float _healthPoints;
-    [Tooltip("The drops that this object might drop when health points run out")]
-    [SerializeField] private List<GameObject> _drops; //TODO: Esto quizas deberia ser solo collectables
- 
+    [Tooltip("The normal drop that this object might drop when health points run out")]
+    [SerializeField] private GameObject _normalDrop; //TODO: Esto quizas deberia ser solo collectables
+    [Tooltip("The perfect drop that this object might drop when health points run out when doing perfect damage")]
+    [SerializeField] private GameObject _perfectDrop;
+
 
     private float _currentHealthPoints;
 
@@ -20,27 +22,18 @@ public class HealthComponent : MonoBehaviour
     private void Start()
     {
         _currentHealthPoints = _healthPoints;
-        DoDamage(_currentHealthPoints);
     }
 
-    public void DoDamage(float damage)
+    public void DoDamage(float damage, bool isPerfect = false)
     {
         _currentHealthPoints -= damage;
-        if (_currentHealthPoints <= 0) OnDestroyed();
+        if (_currentHealthPoints <= 0) OnDestroyed(isPerfect);
     }
 
-    private void OnDestroyed()
+    private void OnDestroyed(bool isPerfect)
     {
-        SpawnDrops();
+        GameObject drop = isPerfect ? _perfectDrop : _normalDrop;
+        Instantiate(drop);
         Destroy(this.gameObject);
-    }
-
-    private void SpawnDrops()
-    {
-        if (_drops.Count > 0)
-        {
-            GameObject drop = _drops[Random.Range(0, _drops.Count-1)];
-            Instantiate(drop, this.gameObject.transform.position, Quaternion.identity);
-        }
     }
 }
