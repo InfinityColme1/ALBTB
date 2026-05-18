@@ -9,6 +9,10 @@ public class InteractiveComponent : MonoBehaviour
     [SerializeField] private bool _onlyInteractOnce;
     [SerializeField] private bool _destroyOnInteract;
 
+    [Header("Collectable settings")]
+    [SerializeField] private bool _isCollectable;
+    [SerializeField] private CollectableObject _collectable;
+
     public UnityEvent onInteracted;
 
     public void setCanInteract(bool newState) => _canInteract = !_onlyInteractOnce && newState;
@@ -20,7 +24,7 @@ public class InteractiveComponent : MonoBehaviour
         //TODO AQUÍ HAY QUE HACER QUE EL OBJETO SE HIGHLIGHTEE
     }
 
-    public void Interact()
+    public CollectableObject Interact()
     {
         if (_canInteract) 
         { 
@@ -29,6 +33,7 @@ public class InteractiveComponent : MonoBehaviour
             if (_destroyOnInteract) Destroy(this.gameObject);
         }
 
+        return _isCollectable ? _collectable : null;
     }
 
 }

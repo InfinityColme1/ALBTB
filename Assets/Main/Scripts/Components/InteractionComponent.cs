@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractionComponent : MonoBehaviour
 {
@@ -6,7 +7,10 @@ public class InteractionComponent : MonoBehaviour
     [Tooltip("The inputs this component will receive")]
     [SerializeField] private InputManager _source;
 
+    [Tooltip("Event invoked when an interaction returns a collectable object")]
+    public UnityEvent<CollectableObject> onCollectable;
 
+    [Tooltip("Current object that can be interacted with")]
     private InteractiveComponent _currentInteractive;
 
 
@@ -36,6 +40,10 @@ public class InteractionComponent : MonoBehaviour
 
     private void Interact()
     {
-        if (_currentInteractive) _currentInteractive.Interact();
+        if (_currentInteractive)
+        {
+            CollectableObject collectable = _currentInteractive.Interact();
+            if (collectable) onCollectable.Invoke(collectable);
+        }
     }
 }
