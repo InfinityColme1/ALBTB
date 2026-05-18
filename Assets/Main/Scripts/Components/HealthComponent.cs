@@ -8,9 +8,9 @@ public class HealthComponent : MonoBehaviour
     [Tooltip("The total health points of this component")]
     [SerializeField] private float _healthPoints;
     [Tooltip("The normal drop that this object might drop when health points run out")]
-    [SerializeField] private GameObject _normalDrop; //TODO: Esto quizas deberia ser solo collectables
+    [SerializeField] private CollectableObject _normalDrop;
     [Tooltip("The perfect drop that this object might drop when health points run out when doing perfect damage")]
-    [SerializeField] private GameObject _perfectDrop;
+    [SerializeField] private CollectableObject _perfectDrop;
 
 
     private float _currentHealthPoints;
@@ -32,7 +32,7 @@ public class HealthComponent : MonoBehaviour
 
     private void OnDestroyed(bool isPerfect)
     {
-        GameObject drop = isPerfect ? _perfectDrop : _normalDrop;
+        CollectableObject drop = isPerfect ? _perfectDrop : _normalDrop;
         Instantiate(drop);
         Destroy(this.gameObject);
     }

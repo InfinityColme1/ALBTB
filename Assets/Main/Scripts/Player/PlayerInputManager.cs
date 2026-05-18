@@ -34,7 +34,6 @@ public class PlayerInputManager : InputManager
     public override void LookInput(Vector2 newLookDirection) => look = newLookDirection;
     public override void SprintInput(bool newSprintState)
     {
-        Debug.Log(newSprintState);
         sprint = newSprintState;
     }
     public override void InteractInput() => onInteract.Invoke();
