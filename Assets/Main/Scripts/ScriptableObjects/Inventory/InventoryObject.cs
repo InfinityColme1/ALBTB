@@ -14,16 +14,6 @@ public class InventoryObject : ScriptableObject
     public int cursedFlowers;
     public int junk;
 
-    [Header("Tool Inventory")]
-    public GameObject machete;
-    public GameObject axe;
-    public GameObject chainsaw;
-
-
-    private bool _canCollectTools;
-
-    public void setCanCollectTools(bool newState) => _canCollectTools = newState;
-
     public void AddCollectable(CollectableObject collectable, int amount)
     {
         switch(collectable.type)
@@ -43,13 +33,15 @@ public class InventoryObject : ScriptableObject
                 junk += amount;
                 break;
             default:
-                AddTool(collectable);
+                AddOther(collectable);
                 break;
         }
     }
 
-    private void AddTool(CollectableObject collectable)
+    protected virtual void AddOther(CollectableObject collectable) 
     {
-
+        // Esta función no la deben implementar clases hijos de esta
+        // Sirve para gestionar la recolección única de recursos ligados a un personaje en particular
+        // E.J Solo el jugador puede recoger herramientas
     }
 }
