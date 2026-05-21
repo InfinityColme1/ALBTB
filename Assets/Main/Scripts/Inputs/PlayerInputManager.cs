@@ -14,8 +14,8 @@ public class PlayerInputManager : InputManager
     [Tooltip("The current mouse sensitivty")]
     [SerializeField] private float mouseSensivity = 0.005f;
 
-    [Tooltip("Triggeres whenever the player tries to use a tool")]
-    public UnityEvent onCut;
+    [Tooltip("Indicates that the player tries to use a tool")]
+    public bool cut;
 
 
     private void Start()
@@ -36,7 +36,7 @@ public class PlayerInputManager : InputManager
     public void OnSprint(InputValue value) => SprintInput(value.isPressed);
     public void OnInteract(InputValue value) => InteractInput();
 
-    public void OnAttack(InputValue value) => onCut.Invoke();
+    public void OnAttack(InputValue value) => OnCut(value.isPressed);
 
 
     public override void MoveInput(Vector2 newMoveDirection) => move = newMoveDirection;
@@ -55,4 +55,6 @@ public class PlayerInputManager : InputManager
     {
         return look.y * mouseSensivity;
     }
+
+    public void OnCut(bool newState) => cut = newState;
 }

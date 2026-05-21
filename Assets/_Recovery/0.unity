@@ -818,10 +818,6 @@ PrefabInstance:
       propertyPath: _damage
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4161823477910638754, guid: 0d34ca7d33fe46f48b893e2112a11c46, type: 3}
-      propertyPath: _totalResistance
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4760962810263289215, guid: 0d34ca7d33fe46f48b893e2112a11c46, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

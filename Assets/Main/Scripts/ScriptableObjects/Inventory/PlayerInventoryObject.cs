@@ -6,11 +6,11 @@ using UnityEngine;
 public class PlayerInventoryObject : InventoryObject
 {
     [Header("Tool Inventory")]
-    public List<ToolAbstractObject> toolList;
+    public List<ToolBehaviour> toolList;
 
     protected override void AddOther(CollectableObject collectable)
     {
-        ToolAbstractObject newTool = collectable.toolInformation;
+        ToolBehaviour newTool = collectable.toolInformation;
         if (newTool) toolList.Add(newTool);
     }
 }

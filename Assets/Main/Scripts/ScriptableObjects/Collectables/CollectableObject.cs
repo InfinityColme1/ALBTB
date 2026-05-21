@@ -12,7 +12,7 @@ public class CollectableObject : ScriptableObject
 
     [Header("Other Type's information")]
     // Aquí se puede poner la info de otro tipo de objetos recogibles.
-    public ToolAbstractObject toolInformation;
+    public ToolBehaviour toolInformation;
 
     public int GetAmount() => amount;
 

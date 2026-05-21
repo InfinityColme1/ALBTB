@@ -1,4 +1,5 @@
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ToolsComponent : MonoBehaviour
@@ -11,24 +12,26 @@ public class ToolsComponent : MonoBehaviour
 
     [SerializeField] private PlayerInventoryObject _playerInventory;
 
-    private CinemachineCamera _cam;
-    [SerializeField] private ToolAbstractObject _currentTool; // TEMP: Serialización temporal, debería ser 100% priv
-    private int _toolIdx = 0;
+    [SerializeField] private Camera _toolRaycastOrigin;
 
-    private void Awake()
-    {
-        _cam = GetComponent<CinemachineCamera>();
-    }
+    [SerializeField] private ToolBehaviour _currentTool; // TEMP: Serialización temporal, debería ser 100% priv
 
     private void Start()
     {
-        _source.onCut.AddListener(Cut);
+        //TEMP
+        SwitchTool();
+    }
+
+    private void Update()
+    {
+        if (_source.cut) Cut();
     }
 
     private void Cut() => _currentTool.Cut();
 
     public void SwitchTool()
     {
-        _currentTool.Initialize(_cam);
+        //TEMP
+        _currentTool.Initialize(_toolRaycastOrigin);
     }
 }
