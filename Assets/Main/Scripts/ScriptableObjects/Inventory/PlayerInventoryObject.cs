@@ -13,4 +13,5 @@ public class PlayerInventoryObject : InventoryObject
         ToolBehaviour newTool = collectable.toolInformation;
         if (newTool) toolList.Add(newTool);
     }
+
 }

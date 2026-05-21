@@ -28,17 +28,24 @@ public class ToolBehaviour : MonoBehaviour
     private void Awake()
     {
         _currentResistance = _totalResistance;
-        _timer = gameObject.GetComponent<Timer>();
     }
 
-    private void Start()
-    {
-        _timer.onTimerStopped.AddListener(() => _canCut = true);
-    }
-
-    public void Initialize(Camera origin)
+    public void Initialize(Camera origin, Timer timer)
     {
         _origin = origin;
+
+        if (!_timer)
+        {
+            _timer = timer;
+            _timer.onTimerStopped.AddListener(() => _canCut = true);
+        }
+
+        if (_currentResistance < 0 || 
+            _currentResistance > _totalResistance || 
+            (_currentResistance == 0) && _canCut)
+        {
+            _currentResistance = _totalResistance;
+        }
     }
 
     public void Cut()
@@ -62,6 +69,7 @@ public class ToolBehaviour : MonoBehaviour
             {
                 branchHealth.DoDamage(_damage, _currentResistance <= _totalResistance * _resistanceBoundary);
                 _currentResistance -= _resistanceDecrease;
+                if (_currentResistance < 0) _canCut = false;
                 Debug.Log("RESISTANCE: " + _currentResistance);
             }
 

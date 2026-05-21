@@ -17,6 +17,8 @@ public class PlayerInputManager : InputManager
     [Tooltip("Indicates that the player tries to use a tool")]
     public bool cut;
 
+    public UnityEvent onNextTool;
+
 
     private void Start()
     {
@@ -35,8 +37,8 @@ public class PlayerInputManager : InputManager
     public void OnLook(InputValue value) => LookInput(value.Get<Vector2>());
     public void OnSprint(InputValue value) => SprintInput(value.isPressed);
     public void OnInteract(InputValue value) => InteractInput();
-
     public void OnAttack(InputValue value) => OnCut(value.isPressed);
+    public void OnNext(InputValue value) => onNextTool.Invoke();
 
 
     public override void MoveInput(Vector2 newMoveDirection) => move = newMoveDirection;

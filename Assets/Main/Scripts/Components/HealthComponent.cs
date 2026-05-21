@@ -27,7 +27,7 @@ public class HealthComponent : MonoBehaviour
     public void DoDamage(float damage, bool isPerfect = false)
     {
         _currentHealthPoints -= damage;
-        Debug.Log("Current Health: " + _currentHealthPoints);
+        Debug.Log(gameObject.name + " - Current Health: " + _currentHealthPoints);
         if (_currentHealthPoints <= 0) OnDestroyed(isPerfect);
     }
 

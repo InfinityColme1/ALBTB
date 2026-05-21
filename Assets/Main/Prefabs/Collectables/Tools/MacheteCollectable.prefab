@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2964170424270350282
+--- !u!1 &9029238624226529798
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4760962810263289215}
-  - component: {fileID: 4161823477910638754}
+  - component: {fileID: 3340811169651875518}
+  - component: {fileID: -7996674235671619699}
   m_Layer: 0
-  m_Name: Axe
+  m_Name: MacheteCollectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4760962810263289215
+--- !u!4 &3340811169651875518
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2964170424270350282}
+  m_GameObject: {fileID: 9029238624226529798}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,22 +32,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4161823477910638754
+--- !u!114 &-7996674235671619699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2964170424270350282}
+  m_GameObject: {fileID: 9029238624226529798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e6b0254fd136f439613a4e1555bc6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 537fb3b0a1d7fd7428d8a390c9da510e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ToolBehaviour
-  _distance: 3
-  _coolDown: 1
-  _damage: 3
-  _totalResistance: 20
-  _resistanceDecrease: 1
-  _resistanceBoundary: 0.1
-  _canCut: 1
+  m_EditorClassIdentifier: Assembly-CSharp::InteractiveComponent
+  _canInteract: 1
+  _highlightableMesh: {fileID: 0}
+  _onlyInteractOnce: 1
+  _destroyOnInteract: 1
+  _isCollectable: 1
+  _collectable: {fileID: 11400000, guid: 44ea208f944f46244b30b54c9e7b5e05, type: 2}
+  onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
