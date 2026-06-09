@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3158e9967f29b2041ab6eab6523450d9, type: 3}
-  m_Name: PlayerInventory
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryObject
+  m_Script: {fileID: 11500000, guid: f41a3e3689af248498054d8cf6c7c03b, type: 3}
+  m_Name: PlayerInventoryObject
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventoryObject
   favorCoins: 0
   pactCoins: 0
   soulCoins: 0
+  streakCoins: 29
   branches: 0
   perfectBranches: 0
   cursedFlowers: 0
   junk: 0
-  machete: {fileID: 0}
-  axe: {fileID: 0}
-  chainsaw: {fileID: 0}
+  toolList:
+  - {fileID: 4161823477910638754, guid: 0d34ca7d33fe46f48b893e2112a11c46, type: 3}

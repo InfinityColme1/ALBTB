@@ -8,15 +8,22 @@ public class InventoryComponent : MonoBehaviour
 
     [Header("Inventory Settings")]
     [SerializeField] private bool _canCollect = true;
-    [SerializeField] private bool _canCollectTools = true;
 
 
     private void Start()
     {
-        _inventory.setCanCollectTools(_canCollectTools);
         _interaction.onCollectable.AddListener(AddCollectable);
     }
 
+    public void AddCurrency(CurrencyType type, int amount)
+    {
+        _inventory.AddCurrency(type, amount);
+    }
+
+    public int GetCurrency(CurrencyType type)
+    {
+        return _inventory.GetCurrency(type);
+    }
 
     public void AddCollectable(CollectableObject collectable)
     {

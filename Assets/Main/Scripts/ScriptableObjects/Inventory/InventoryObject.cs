@@ -1,12 +1,17 @@
 using UnityEngine;
 
+public enum CurrencyType { FAVOR, PACT, SOUL, STREAK };
+
+
 [CreateAssetMenu(fileName = "InventoryObject", menuName = "Scriptable Objects/InventoryObject")]
 public class InventoryObject : ScriptableObject
 {
+
     [Header("Currency Inventory")]
     public int favorCoins;
     public int pactCoins;
     public int soulCoins;
+    public int streakCoins;
 
     [Header("Resources Inventory")]
     public int branches;
@@ -14,15 +19,40 @@ public class InventoryObject : ScriptableObject
     public int cursedFlowers;
     public int junk;
 
-    [Header("Tool Inventory")]
-    public GameObject machete;
-    public GameObject axe;
-    public GameObject chainsaw;
 
+    public int GetCurrency(CurrencyType type)
+    {
+        switch (type)
+        {
+            case CurrencyType.FAVOR:
+                return favorCoins;
+            case CurrencyType.PACT:
+                return pactCoins;
+            case CurrencyType.SOUL:
+                return soulCoins;
+            default:
+                return streakCoins;
+        }
+    }
 
-    private bool _canCollectTools;
-
-    public void setCanCollectTools(bool newState) => _canCollectTools = newState;
+    public void AddCurrency(CurrencyType type, int amount)
+    {
+        switch(type)
+        {
+            case CurrencyType.FAVOR:
+                favorCoins += amount;
+                break;
+            case CurrencyType.PACT:
+                pactCoins += amount;
+                break;
+            case CurrencyType.SOUL:
+                soulCoins += amount;
+                break;
+            case CurrencyType.STREAK:
+                streakCoins += amount;
+                break;
+        }
+    }
 
     public void AddCollectable(CollectableObject collectable, int amount)
     {
@@ -43,13 +73,15 @@ public class InventoryObject : ScriptableObject
                 junk += amount;
                 break;
             default:
-                AddTool(collectable);
+                AddOther(collectable);
                 break;
         }
     }
 
-    private void AddTool(CollectableObject collectable)
+    protected virtual void AddOther(CollectableObject collectable) 
     {
-
+        // Esta función no la deben implementar clases hijos de esta
+        // Sirve para gestionar la recolección única de recursos ligados a un personaje en particular
+        // E.J Solo el jugador puede recoger herramientas
     }
 }
