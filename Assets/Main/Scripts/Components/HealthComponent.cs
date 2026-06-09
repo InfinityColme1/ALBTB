@@ -24,11 +24,15 @@ public class HealthComponent : MonoBehaviour
         _currentHealthPoints = _healthPoints;
     }
 
-    public void DoDamage(float damage, bool isPerfect = false)
+    public bool DoDamage(float damage, bool isPerfect = false)
     {
         _currentHealthPoints -= damage;
-        Debug.Log(gameObject.name + " - Current Health: " + _currentHealthPoints);
-        if (_currentHealthPoints <= 0) OnDestroyed(isPerfect);
+        if (_currentHealthPoints <= 0) {
+            OnDestroyed(isPerfect);
+            return true;
+        }
+
+        return false;
     }
 
     private void OnDestroyed(bool isPerfect)

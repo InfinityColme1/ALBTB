@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ToolsComponent : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class ToolsComponent : MonoBehaviour
     [SerializeField] private Camera _toolRaycastOrigin;
 
     [SerializeField] private ToolBehaviour _currentTool;
+
+    public UnityEvent onBranchCut;
 
     private int _toolIdx = 0;
     private Timer _timer;
@@ -37,12 +40,16 @@ public class ToolsComponent : MonoBehaviour
 
     private void Cut()
     {
-        if (_currentTool) _currentTool.Cut();
+        if (_currentTool)
+        {
+            if (_currentTool.Cut()) onBranchCut.Invoke();
+        }
     }
 
     public void SwitchTool()
     {
-        _toolIdx = (_toolIdx++) % _playerInventory.toolList.Count;
+        _toolIdx += 1;
+        if (_toolIdx >= _playerInventory.toolList.Count) _toolIdx = 0;
         _currentTool = _playerInventory.toolList[_toolIdx];
         _currentTool.Initialize(_toolRaycastOrigin, _timer);
     }

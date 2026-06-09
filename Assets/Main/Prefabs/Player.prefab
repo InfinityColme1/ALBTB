@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1278756420084632535}
   - component: {fileID: 2641732942072745762}
   - component: {fileID: 5476375534536074418}
+  - component: {fileID: 2551462172097167953}
+  - component: {fileID: 8927756790734881460}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -112,7 +114,8 @@ MonoBehaviour:
       m_Calls: []
   startWithLockedCursor: 1
   mouseSensivity: 0.01
-  onCut:
+  cut: 0
+  onNextTool:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &2641732942072745762
@@ -144,6 +147,43 @@ MonoBehaviour:
   _inventory: {fileID: 11400000, guid: 8edb53238c2c64b42b019d3438fb43e0, type: 2}
   _interaction: {fileID: 4165452008863708265}
   _canCollect: 1
+--- !u!114 &2551462172097167953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321998020294356980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245532825b3d1464d99d55f2d271baa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _inventoryComponent: {fileID: 0}
+--- !u!114 &8927756790734881460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321998020294356980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60778f0967cd484b95607c6d0ef0188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
+  autoStart: 0
+  oneShot: 1
+  paused: 0
+  notifyEachSecond: 0
+  timeLeft: 1
+  waitTime: 1
+  onTimerStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  onSecondPassed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3571286886662570764
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +414,7 @@ GameObject:
   - component: {fileID: 4165452008863708265}
   - component: {fileID: 844239942156782615}
   - component: {fileID: 6958620725524243104}
+  - component: {fileID: 2283354664610034453}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -465,4 +506,43 @@ MonoBehaviour:
   _source: {fileID: 1278756420084632535}
   _playerInventory: {fileID: 11400000, guid: 8edb53238c2c64b42b019d3438fb43e0, type: 2}
   _toolRaycastOrigin: {fileID: 0}
-  _currentTool: {fileID: 11400000, guid: 27c9b3ece95384d489c1aa5e9e593b94, type: 2}
+  _currentTool: {fileID: 2004187652287346042, guid: 2c978d3d09d1514439abb36d6dc0fd74, type: 3}
+  onBranchCut:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1321998020294356980}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+--- !u!114 &2283354664610034453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895446198937621855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60778f0967cd484b95607c6d0ef0188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
+  autoStart: 0
+  oneShot: 1
+  paused: 0
+  notifyEachSecond: 0
+  timeLeft: 1
+  waitTime: 1
+  onTimerStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  onSecondPassed:
+    m_PersistentCalls:
+      m_Calls: []

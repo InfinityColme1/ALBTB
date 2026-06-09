@@ -47,7 +47,8 @@ MonoBehaviour:
   _distance: 3
   _coolDown: 1
   _damage: 3
-  _totalResistance: 20
+  _totalResistance: 200
   _resistanceDecrease: 1
   _resistanceBoundary: 0.1
+  _startWithMaxResistance: 1
   _canCut: 1

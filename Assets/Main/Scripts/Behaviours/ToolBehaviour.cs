@@ -19,6 +19,9 @@ public class ToolBehaviour : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float _resistanceBoundary;
 
+    [Tooltip("FOR DEBUG ONLY: Resets this tools resistance to max whenever is equiped")]
+    [SerializeField] private bool _startWithMaxResistance = false;
+
     protected Camera _origin;
     private float _currentResistance;
     [SerializeField] private bool _canCut = true;
@@ -28,6 +31,7 @@ public class ToolBehaviour : MonoBehaviour
     private void Awake()
     {
         _currentResistance = _totalResistance;
+        Debug.Log("START - " + _currentResistance);
     }
 
     public void Initialize(Camera origin, Timer timer)
@@ -37,28 +41,35 @@ public class ToolBehaviour : MonoBehaviour
         if (!_timer)
         {
             _timer = timer;
-            _timer.onTimerStopped.AddListener(() => _canCut = true);
+            _timer.onTimerStopped.AddListener(() => { if (_currentResistance > 0) _canCut = true; });
         }
 
         if (_currentResistance < 0 || 
             _currentResistance > _totalResistance || 
-            (_currentResistance == 0) && _canCut)
+            (_currentResistance == 0) && _canCut ||
+            _startWithMaxResistance)
         {
             _currentResistance = _totalResistance;
         }
+
+        if (_currentResistance > 0) _canCut = true;
+
     }
 
-    public void Cut()
+    public bool Cut()
     {
         if (_canCut)
         {
-            CastRay();
             _timer.StartTimer(_coolDown);
             _canCut = false;
+
+            return CastRay();
         }
+
+        return false;
     }
 
-    protected void CastRay()
+    protected bool CastRay()
     {
         Ray ray = _origin.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         RaycastHit hit;
@@ -67,12 +78,14 @@ public class ToolBehaviour : MonoBehaviour
             HealthComponent branchHealth = hit.collider.GetComponent<HealthComponent>();
             if (branchHealth)
             {
-                branchHealth.DoDamage(_damage, _currentResistance <= _totalResistance * _resistanceBoundary);
                 _currentResistance -= _resistanceDecrease;
                 if (_currentResistance < 0) _canCut = false;
-                Debug.Log("RESISTANCE: " + _currentResistance);
+
+                return branchHealth.DoDamage(_damage, _currentResistance <= _totalResistance * _resistanceBoundary);
             }
 
         }
+
+        return false;
     }
 }

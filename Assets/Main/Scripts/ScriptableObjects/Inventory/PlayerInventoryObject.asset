@@ -15,6 +15,7 @@ MonoBehaviour:
   favorCoins: 0
   pactCoins: 0
   soulCoins: 0
+  streakCoins: 29
   branches: 0
   perfectBranches: 0
   cursedFlowers: 0

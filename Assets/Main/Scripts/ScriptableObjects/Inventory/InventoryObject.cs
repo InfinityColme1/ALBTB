@@ -1,18 +1,58 @@
 using UnityEngine;
 
+public enum CurrencyType { FAVOR, PACT, SOUL, STREAK };
+
+
 [CreateAssetMenu(fileName = "InventoryObject", menuName = "Scriptable Objects/InventoryObject")]
 public class InventoryObject : ScriptableObject
 {
+
     [Header("Currency Inventory")]
     public int favorCoins;
     public int pactCoins;
     public int soulCoins;
+    public int streakCoins;
 
     [Header("Resources Inventory")]
     public int branches;
     public int perfectBranches;
     public int cursedFlowers;
     public int junk;
+
+
+    public int GetCurrency(CurrencyType type)
+    {
+        switch (type)
+        {
+            case CurrencyType.FAVOR:
+                return favorCoins;
+            case CurrencyType.PACT:
+                return pactCoins;
+            case CurrencyType.SOUL:
+                return soulCoins;
+            default:
+                return streakCoins;
+        }
+    }
+
+    public void AddCurrency(CurrencyType type, int amount)
+    {
+        switch(type)
+        {
+            case CurrencyType.FAVOR:
+                favorCoins += amount;
+                break;
+            case CurrencyType.PACT:
+                pactCoins += amount;
+                break;
+            case CurrencyType.SOUL:
+                soulCoins += amount;
+                break;
+            case CurrencyType.STREAK:
+                streakCoins += amount;
+                break;
+        }
+    }
 
     public void AddCollectable(CollectableObject collectable, int amount)
     {

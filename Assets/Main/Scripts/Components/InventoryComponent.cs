@@ -15,6 +15,15 @@ public class InventoryComponent : MonoBehaviour
         _interaction.onCollectable.AddListener(AddCollectable);
     }
 
+    public void AddCurrency(CurrencyType type, int amount)
+    {
+        _inventory.AddCurrency(type, amount);
+    }
+
+    public int GetCurrency(CurrencyType type)
+    {
+        return _inventory.GetCurrency(type);
+    }
 
     public void AddCollectable(CollectableObject collectable)
     {
